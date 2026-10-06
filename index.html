@@ -147,7 +147,7 @@ input[type=color]{width:26px;height:22px;padding:0;border:1px solid var(--line);
     <div class="crleft"><select id="chan" hidden aria-hidden="true" tabindex="-1"></select></div>
     <div class="crcenter">
       <button id="modeBrand" class="modebtn brand">Brand &amp; data</button>
-      <button id="modeTesting" class="modebtn creative">Testing</button>
+      <button id="modeTesting" class="modebtn creative">Creative &amp; design</button>
     </div>
     <div class="crright">
       <span class="mono">Preview mode</span>
@@ -310,7 +310,7 @@ loadDataset(G_BETA);
 const PRESETS={
   green:['#6DBF4F','#315B00','#0C2D00','#7F7FF4'],
   orangeBurn:['#C4C754','#E099E0','#9797FF','#7F671F','#791E1D','#FF3A07'],
-  testing:['#C4C754','#E099E0','#9797FF','#791E1D','#FF3A07']      // TEMPORARY: Creative without the dark olive
+  testing:['#C4C754','#E099E0','#9797FF','#791E1D','#FF3A07']      // the final Creative & design palette (shown as "Creative & design")
 };
 /* outline colour per mode */
 const OUTLINE={brand:'#00190D',creative:'#3A0011',testing:'#3A0011'};
@@ -920,7 +920,7 @@ fmtBtns.png.onclick=()=>setFmt('png');
 fmtBtns.jpg.onclick=()=>setFmt('jpg');
 function exportNow(){
   const[w,h]=aspectSize(),[a,b]=selRange();
-  const stamp=`${S.mode}-${S.chan}-${fmt(a).replace(':','m')}`+(S.seed?`-v${S.seed}`:'');
+  const stamp=`${S.mode==='testing'?'creative':S.mode}-${S.chan}-${fmt(a).replace(':','m')}`+(S.seed?`-v${S.seed}`:'');
   if(exFormat==='svg'){dl(`synapse-${stamp}.svg`,new Blob([buildSVG(w,h)],{type:'image/svg+xml'}));return;}
   const sc=3,c=document.createElement('canvas');c.width=w*sc;c.height=h*sc;
   const g=c.getContext('2d');g.setTransform(sc,0,0,sc,0,0);
@@ -1126,7 +1126,7 @@ function applyMode(mode){
   fullRebuild();
 }
 document.getElementById('modeBrand').onclick=()=>applyMode('brand');
-document.getElementById('modeTesting').onclick=()=>applyMode('testing');   // TEMPORARY testing palette
+document.getElementById('modeTesting').onclick=()=>applyMode('testing');   // labelled "Creative & design" in the interface
 
 renderBookmarks();syncSel();applyMode('brand');
 addEventListener('resize',()=>{drawOverview();redraw();});
