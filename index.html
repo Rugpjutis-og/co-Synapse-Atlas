@@ -147,7 +147,6 @@ input[type=color]{width:26px;height:22px;padding:0;border:1px solid var(--line);
     <div class="crleft"><select id="chan" hidden aria-hidden="true" tabindex="-1"></select></div>
     <div class="crcenter">
       <button id="modeBrand" class="modebtn brand">Brand &amp; data</button>
-      <button id="modeCreative" class="modebtn creative">Creative &amp; design</button>
       <button id="modeTesting" class="modebtn creative">Testing</button>
     </div>
     <div class="crright">
@@ -1123,12 +1122,10 @@ function applyMode(mode){
   // one class on <body> drives the --theme colour for every control
   document.body.classList.toggle('mode-creative',mode!=='brand');
   document.getElementById('modeBrand').classList.toggle('active',mode==='brand');
-  document.getElementById('modeCreative').classList.toggle('active',mode==='creative');
   document.getElementById('modeTesting').classList.toggle('active',mode==='testing');
   fullRebuild();
 }
 document.getElementById('modeBrand').onclick=()=>applyMode('brand');
-document.getElementById('modeCreative').onclick=()=>applyMode('creative');
 document.getElementById('modeTesting').onclick=()=>applyMode('testing');   // TEMPORARY testing palette
 
 renderBookmarks();syncSel();applyMode('brand');
